@@ -33,3 +33,63 @@ def test():
 
 if __name__ == "__main__":
         test() 
+
+        
+    
+def postuple(user_data:DRequest):
+    results=[]
+    fieldname=['id', 'title', 'body',]
+    Posts=namedtuple('Posts', fieldname)
+
+    for i in user_data:
+        id,title,body=i['id'],i['title'],i['body']
+        post=Posts(id=id,title=title,body=body)
+        results.append(post)
+    return results
+
+def test():
+    test=DRequest(URL= "https://dummyjson.com/posts")
+    print(postuple(test.downlaod())) 
+
+if __name__ == "__main__":
+        test() 
+
+
+
+
+def producttuple(user_data:DRequest):
+    results=[]
+    fieldname=['category', 'title', 'rating']
+    Product=namedtuple('Product', fieldname)
+
+    for i in user_data:
+        category, title, rating = i['category'],i['title'],i['rating']
+        product=Product(category=category,title=title,rating=rating)
+        results.append(product)
+    return results
+
+def test():
+    test=DRequest(URL= "https://dummyjson.com/products")
+    print(producttuple(test.downlaod())) 
+
+if __name__ == "__main__":
+        test() 
+
+
+def commentstuple(user_data:DRequest):
+    results=[]
+    fieldname=['id', 'postId', 'likes']
+    Comments=namedtuple('Comments', fieldname)
+
+    for i in user_data:
+        id,postId,likes = i['id'],i['postId'],i['likes']
+        comment=Comments(id=id,postId=postId,likes=likes)
+        results.append(comment)
+    return results
+
+def test():
+    test=DRequest(URL= "https://dummyjson.com/comments")
+    print(commentstuple(test.downlaod())) 
+
+if __name__ == "__main__":
+        test() 
