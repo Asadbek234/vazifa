@@ -1,1 +1,35 @@
+import requests
+from collections import namedtuple
+from dataclasses import dataclass
 
+
+@dataclass
+class DRequest:
+    URL: str
+
+
+    def downlaod(self):
+        
+        p_data:list
+        l_data=requests.get(self.URL)
+        d=self.URL.split('/')[-1]
+        data=l_data.json()[d]
+        return data
+    
+def usertuple(user_data:DRequest):
+    results=[]
+    fieldname=['firstName', 'lastName', 'age', 'email',]
+    User=namedtuple('User', fieldname)
+
+    for i in user_data:
+        firstName,lastName,age,email=i['firstName'],i['lastName'],i['age'],i['email']
+        user=User(firstName=firstName,lastName=lastName,age=age, email=email)
+        results.append(user)
+    return results
+
+def test():
+    test=DRequest(URL= "https://dummyjson.com/users")
+    print(usertuple(test.downlaod())) 
+
+if __name__ == "__main__":
+        test() 
